@@ -1,0 +1,20 @@
+{
+  "shopUrl": "https://ipesoa.github.io/",
+  "marquesina": ["aqui van random", "etc"],
+  "entradas": [
+    {
+      "titulo": "drone machine",
+      "texto": "breve texto explicando\nde que va la aplicacion\nexplicando\nexplicando explicando",
+      "url": "https://ipesoa.github.io/",
+      "imagen": "",
+      "etiquetas": "audio drones sintetizador sonido"
+    },
+    {
+      "titulo": "graphic editor",
+      "texto": "breve texto explicando\nde que va la aplicacion\nexplicando\nexplicando explicando",
+      "url": "https://ipesoa.github.io/",
+      "imagen": "",
+      "etiquetas": "imagen diseño cartel editor"
+    }
+  ]
+}

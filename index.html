@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I.PESOA HUB</title>
+<meta name="description" content="Hub de proyectos de I.PESOA: herramientas, editores gráficos y experimentos.">
+<style>
+  :root{
+    --tinta:#003030;
+    --negro:#000;
+    --papel:#fff;
+    --borde:4px;
+    --gap:26px;
+    --max:1000px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--papel);color:var(--negro)}
+  body{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-style:italic;
+    font-weight:700;
+    -webkit-font-smoothing:antialiased;
+    padding:24px 20px 80px;
+  }
+  .wrap{max-width:var(--max);margin:0 auto}
+
+  /* ---------- cabecera ---------- */
+  .cabecera{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:110px;
+    margin-bottom:6px;
+  }
+  .cabecera h1{
+    margin:0;
+    font-size:clamp(38px,8.4vw,82px);
+    letter-spacing:-.02em;
+    line-height:1;
+    text-align:center;
+    padding-right:90px;
+  }
+  .shop{
+    position:absolute;
+    right:0;
+    top:-8px;
+    width:clamp(80px,13vw,132px);
+    display:block;
+    transition:transform .25s ease;
+  }
+  .shop:hover,.shop:focus-visible{transform:rotate(-12deg) scale(1.06)}
+  .shop svg{display:block;width:100%;height:auto}
+
+  /* ---------- marquesina ---------- */
+  .marquesina{
+    border-bottom:var(--borde) solid var(--negro);
+    overflow:hidden;
+    padding-bottom:4px;
+    margin-bottom:34px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);
+  }
+  .pista{
+    display:inline-flex;
+    white-space:nowrap;
+    will-change:transform;
+    animation:desfile 46s linear infinite;
+  }
+  .marquesina:hover .pista{animation-play-state:paused}
+  .pista span{
+    font-size:clamp(20px,3.6vw,34px);
+    text-decoration:underline;
+    text-underline-offset:3px;
+    padding-right:.45em;
+  }
+  @keyframes desfile{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){
+    .pista{animation:none}
+  }
+
+  /* ---------- buscador ---------- */
+  .buscador{
+    width:100%;
+    border:var(--borde) solid var(--tinta);
+    background:var(--papel);
+    color:var(--negro);
+    font:inherit;
+    font-size:clamp(18px,2.6vw,26px);
+    padding:14px 18px;
+    margin-bottom:34px;
+    border-radius:0;
+    outline-offset:4px;
+  }
+  .buscador::placeholder{color:var(--negro);opacity:1}
+  .buscador:focus{outline:3px solid var(--negro)}
+
+  /* ---------- entradas ---------- */
+  .lista{display:flex;flex-direction:column;gap:44px}
+  .entrada{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:var(--gap);
+    align-items:start;
+    text-decoration:none;
+    color:inherit;
+  }
+  .entrada .marco{
+    grid-column:1;
+    grid-row:1;
+    border:var(--borde) solid var(--tinta);
+    aspect-ratio:4/2.9;
+    overflow:hidden;
+    background:var(--papel);
+  }
+  .entrada .texto{grid-column:2;grid-row:1}
+  .entrada.espejo .marco{grid-column:2}
+  .entrada.espejo .texto{grid-column:1}
+  .marco img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+  .entrada:hover .marco img,.entrada:focus-visible .marco img{transform:scale(1.035)}
+  .entrada:focus-visible{outline:3px solid var(--negro);outline-offset:8px}
+  .texto h2{
+    margin:0 0 .1em;
+    font-size:clamp(19px,2.5vw,25px);
+    line-height:1.14;
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+  .texto p{
+    margin:0;
+    font-size:clamp(19px,2.5vw,25px);
+    line-height:1.14;
+    white-space:pre-line;
+  }
+  .vacio{font-size:22px;line-height:1.3;margin:10px 0}
+
+  @media (max-width:640px){
+    .cabecera{min-height:0;margin-bottom:14px}
+    .cabecera h1{padding-right:0;text-align:left;font-size:12vw}
+    .cabecera{justify-content:flex-start}
+    .shop{position:static;width:74px;margin-left:auto}
+    .entrada{grid-template-columns:1fr;gap:12px}
+    .entrada .marco,.entrada .texto,
+    .entrada.espejo .marco,.entrada.espejo .texto{grid-column:1}
+    .entrada .marco{grid-row:1}
+    .entrada .texto{grid-row:2}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="cabecera">
+    <h1>I.PESOA HUB</h1>
+    <a class="shop" id="shop" href="https://ipesoa.github.io/" aria-label="Tienda: I.PESOA Editorial">
+      <svg viewBox="0 0 220 220" role="img" aria-hidden="true" focusable="false">
+        <polygon fill="#003030" points="110.0,14.0 116.6,55.4 133.9,12.9 129.5,58.6 154.6,25.0 141.2,64.7 176.3,35.1 151.2,73.5 189.0,55.5 158.7,84.4 203.5,74.5 163.4,96.8 205.3,98.4 165.0,110.0 209.3,122.1 163.4,123.2 199.8,144.0 158.7,135.6 192.3,166.8 151.2,146.5 173.7,181.9 141.2,155.3 156.5,198.5 129.5,161.4 133.0,203.2 116.6,164.6 110.0,210.0 103.4,164.6 87.0,203.2 90.5,161.4 63.5,198.5 78.8,155.3 46.3,181.9 68.8,146.5 27.7,166.8 61.3,135.6 20.2,144.0 56.6,123.2 10.7,122.1 55.0,110.0 14.7,98.4 56.6,96.8 16.5,74.5 61.3,84.4 31.0,55.5 68.8,73.5 43.7,35.1 78.8,64.7 65.4,25.0 90.5,58.6 86.1,12.9 103.4,55.4"/>
+        <circle cx="110" cy="110" r="47" fill="#fff"/>
+        <text x="110" y="122" text-anchor="middle" transform="rotate(-12 110 110)"
+              font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-style="italic"
+              font-weight="700" font-size="36" fill="#000">shop</text>
+      </svg>
+    </a>
+  </header>
+
+  <nav class="marquesina" aria-label="Proyectos destacados">
+    <div class="pista" id="pista"></div>
+  </nav>
+
+  <label for="q" class="sr-only" style="position:absolute;left:-9999px">Buscar proyectos</label>
+  <input id="q" class="buscador" type="search" placeholder="search..." autocomplete="off" spellcheck="false">
+
+  <main class="lista" id="lista"></main>
+
+</div>
+
+<script>
+const lista = document.getElementById('lista');
+const pista = document.getElementById('pista');
+const q = document.getElementById('q');
+let datos = { shopUrl:'https://ipesoa.github.io/', marquesina:[], entradas:[] };
+
+const limpio = s => (s||'').toString().toLowerCase()
+  .normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+
+function pintarMarquesina(){
+  const titulos = datos.entradas.map(e => e.titulo).filter(Boolean);
+  const extra = datos.marquesina || [];
+  let palabras = titulos.concat(extra);
+  if(!palabras.length) palabras = ['i.pesoa hub'];
+  for(let i=palabras.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [palabras[i],palabras[j]] = [palabras[j],palabras[i]];
+  }
+  let tanda = palabras.join('  ·  ') + '  ·  ';
+  while(tanda.length < 160) tanda += tanda;
+  pista.innerHTML = '';
+  for(let i=0;i<2;i++){
+    const s = document.createElement('span');
+    s.textContent = tanda;
+    if(i===1) s.setAttribute('aria-hidden','true');
+    pista.appendChild(s);
+  }
+}
+
+function pintarLista(filtro){
+  const f = limpio(filtro);
+  const visibles = datos.entradas.filter(e => {
+    if(!f) return true;
+    return limpio([e.titulo, e.texto, e.etiquetas].join(' ')).includes(f);
+  });
+
+  lista.innerHTML = '';
+
+  if(!visibles.length){
+    const p = document.createElement('p');
+    p.className = 'vacio';
+    p.textContent = datos.entradas.length
+      ? 'nada por aqui. prueba con otra palabra.'
+      : 'todavia no hay entradas. añade la primera desde el panel.';
+    lista.appendChild(p);
+    return;
+  }
+
+  visibles.forEach((e,i) => {
+    const a = document.createElement('a');
+    a.className = 'entrada' + (i % 2 ? ' espejo' : '');
+    a.href = e.url || '#';
+    if(/^https?:/i.test(e.url||'')){ a.target = '_blank'; a.rel = 'noopener'; }
+
+    const marco = document.createElement('div');
+    marco.className = 'marco';
+    if(e.imagen){
+      const img = document.createElement('img');
+      img.src = e.imagen;
+      img.alt = e.titulo || '';
+      img.loading = 'lazy';
+      marco.appendChild(img);
+    }
+
+    const texto = document.createElement('div');
+    texto.className = 'texto';
+    const h2 = document.createElement('h2');
+    h2.textContent = e.titulo || '';
+    const p = document.createElement('p');
+    p.textContent = e.texto || '';
+    texto.append(h2, p);
+
+    a.append(marco, texto);
+    lista.appendChild(a);
+  });
+}
+
+fetch('data.json?v=' + Date.now())
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(d => {
+    datos = Object.assign(datos, d);
+    if(datos.shopUrl) document.getElementById('shop').href = datos.shopUrl;
+    pintarMarquesina();
+    pintarLista('');
+  })
+  .catch(() => {
+    pintarMarquesina();
+    lista.innerHTML = '<p class="vacio">no se pudo leer data.json. abre la pagina con un servidor local o subela a github pages.</p>';
+  });
+
+q.addEventListener('input', () => pintarLista(q.value));
+</script>
+</body>
+</html>
